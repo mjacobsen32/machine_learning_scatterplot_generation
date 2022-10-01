@@ -1,5 +1,6 @@
 from plot_gen_class import Plotting
-
+from OneDegreePoly import OneDegreePoly
+from Grouping import Grouping
 
 '''
     Notes:
@@ -19,43 +20,26 @@ from plot_gen_class import Plotting
 '''
 
 def loop_create(p):
-    for i in range(0, p.TOTAL_PLOTS):
-        if (i % 100 == 0):
+    for i in range(0, p.total_plots):
+        if (i != 0) and (i % 100 == 0):
             print(i)
         p.create_plot(i)
 
 def main():    
-    p = Plotting()
+    p = Plotting('triple_threat', 10, True)
 
-    #p.CLASS_LABEL = "one_strong_pos"
-    #loop_create(p)
-    #p.add_to_csv()
+    strong_pos = OneDegreePoly()
 
-    #p.POS_NEG = -1
-    #p.CLASS_LABEL = "one_strong_neg"
-    #loop_create(p)
-    #p.add_to_csv()
+    strong_neg = OneDegreePoly()
+    strong_neg.pos_neg = -1
 
-    p.TOTAL_PLOTS = 10
-    p.STD_HIGH = 1000
-    p.STD_LOW = 100
-    p.POS_NEG = 1
-    p.CLASS_LABEL = "one_weak_pos"
+    weak_pos = OneDegreePoly()
+    weak_pos.std_range = (100,300)
+
+    p.plots = [strong_pos, strong_neg, weak_pos]
     loop_create(p)
     p.add_to_csv()
 
-    p.POS_NEG = -1
-    p.CLASS_LABEL = "one_weak_neg"
-    loop_create(p)
-    p.add_to_csv()
-
-    p.leading_coe_HIGH = 0
-    p.leading_coe_LOW = 0
-    p.STD_LOW = 500
-    p.POS_NEG = 1
-    p.CLASS_LABEL = "one_no_correlation"
-    loop_create(p)
-    p.add_to_csv()
 
 if __name__ == "__main__":
     main()

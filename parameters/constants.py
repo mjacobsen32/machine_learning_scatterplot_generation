@@ -1,3 +1,3 @@
-PARENT_DIR = '../../data/scatterplots'     # Path to delete and save new plots
-CSV_PARENT_DIR = '../../data/csv_files'
-RGB = ['blue', 'red', 'green'] # Colors to be used in plots by data points
+parent_dir = '../data/scatterplots'     # Path to delete and save new plots
+csv_parent_dir= '../data/csv_files'
+rgb = ['blue', 'red', 'green'] # Colors to be used in plots by data points

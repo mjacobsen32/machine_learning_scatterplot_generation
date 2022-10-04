@@ -4,6 +4,16 @@ from sympy import sympify, symbols
 import random
 import numpy as np
 
+'''
+OneDegreePoly: One degree polynomial creation
+Inherits: Plot for variability attributes, and Poly for y-intercept and 
+            other future Polynomial specific attributes
+Object attributes:
+    lead_coe_rang: leading coefficient range (divided by 10 for python library sake)
+    pos_neg: positive or negative leading coefficient
+    equation: equation for all one degree polynomials to use
+'''
+
 class OneDegreePoly(Plot, Poly):
     def __init__(self):
         Poly.__init__(self)

@@ -18,9 +18,9 @@ class OneDegreePoly(Plot, Poly):
     def __init__(self):
         Poly.__init__(self)
         Plot.__init__(self)
-        self.lead_coe_range = (1, 30)  # leading coefficient range for line creation
-        self.pos_neg        = 1            # positive or negative leading coeeficient (1 for positive, -1 for negative, 0 for both)
-        self.equation       = "(m*x) + b"  # equation to scatterplot
+        self.lead_coe_range = (1, 30)
+        self.pos_neg        = 1
+        self.equation       = "(m*x) + b"
 
     def gen_plot(self):
         eq = sympify(self.equation)

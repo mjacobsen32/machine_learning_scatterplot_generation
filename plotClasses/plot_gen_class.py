@@ -1,4 +1,3 @@
-from codecs import ignore_errors
 import os
 from parameters.constants import *
 import matplotlib.pyplot as plt
@@ -29,23 +28,38 @@ class Plotting:
         self.total_plots = total
         self.plots = []
         self.delete_tree(remove_tree)
+        self.equations = []
+        self.samples = []
+        self.std = []
 
     def delete_tree(self, remove_tree):
         if os.path.exists(self.images_path):
             if remove_tree:
                 try:
                     os.shutil.rmtree(self.images_path, ignore_errors=True)
-                    os.mkdir(self.images_path)
                 except:
                     print("Error deleting directory: {}".format(self.images_path))
-
+        else:
+            os.mkdir(self.images_path)
 
     def add_to_csv(self):
         with open(self.csv_path+'.csv', 'w') as csvfile:
             filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            filewriter.writerow(["image","label"])
-            for i in range(0,self.total_plots):
-                filewriter.writerow([self.class_label+'_'+str(i)+'.png', self.class_label])
+            filewriter.writerow(["image","label","equation1","samples1","std1",
+            "equation2","samples2","std2",
+            "equation3","samples3","std3"])
+            for i in range(0, self.total_plots):
+                filewriter.writerow([self.class_label+'_'+str(i)+'.png', 
+                                        self.class_label,
+                                        self.equations[i][0],
+                                        self.samples[i][0],
+                                        self.std[i][0],
+                                        None if len(self.equations[i]) < 2 else self.equations[i][1],
+                                        None if len(self.samples[i]) < 2 else self.samples[i][1],
+                                        None if len(self.std[i]) < 2 else self.std[i][1],
+                                        None if len(self.equations[i]) < 3 else self.equations[i][2],
+                                        None if len(self.samples[i]) < 3 else self.samples[i][2],
+                                        None if len(self.std[i]) < 3 else self.std[i][2]])
 
 
 
@@ -53,9 +67,18 @@ class Plotting:
         plt.figure(num=0, figsize=(6,6), clear=True)
         plt.tick_params(left=False, right=False, labelleft=False, labelbottom=False, bottom=False)
         plt.axis([0,100,0,100])
+        equationsPlot = []
+        stdPlot = []
+        samplesPlot = []
         for j, p in enumerate(self.plots):
-            (x,y) = p.gen_plot()
+            x, y, eq, sample, std = p.gen_plot()
+            equationsPlot.append(eq)
+            stdPlot.append(std)
+            samplesPlot.append(sample)
             plt.scatter(x=x,y=y,c=self.rgb[j])
+        self.samples.append(samplesPlot)
+        self.std.append(stdPlot)
+        self.equations.append(equationsPlot)
         plt.savefig(os.path.join(self.images_path,self.class_label+'_'+str(i)+'.png'))
         
 

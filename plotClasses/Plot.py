@@ -12,6 +12,7 @@ class Plot:
     def __init__(self):
         self.sample_range = (15,250)
         self.std_range = (1, 100)
-        self.x_range = (0,100)
+        self.x_low_range = (0,15)
+        self.x_high_range = (85,100)
         self.mean = 0
     

@@ -1,4 +1,4 @@
-from Plot import Plot
+from .Plot import Plot
 from sklearn.datasets import make_blobs
 
 

@@ -1,6 +1,6 @@
-from plot_gen_class import Plotting
-from OneDegreePoly import OneDegreePoly
-from Grouping import Grouping
+from plotClasses.plot_gen_class import Plotting
+from plotClasses.OneDegreePoly import OneDegreePoly
+from plotClasses.Grouping import Grouping
 
 '''
     Notes:
@@ -26,20 +26,22 @@ def loop_create(p):
         p.create_plot(i)
 
 def main():    
-    p = Plotting('triple_threat', 10, True)
+    p3 = Plotting(label='threeLines', total=1000, remove_tree=False)
+    p2 = Plotting(label='twoLines', total=1000, remove_tree=False)
+    p1 = Plotting(label='oneLines', total=1000, remove_tree=False)
+    randomOneDegree = OneDegreePoly()
+    
+    p1.plots = [randomOneDegree]
+    loop_create(p1)
+    p1.add_to_csv()
 
-    strong_pos = OneDegreePoly()
+    p2.plots = [randomOneDegree, randomOneDegree]
+    loop_create(p2)
+    p2.add_to_csv()
 
-    strong_neg = OneDegreePoly()
-    strong_neg.pos_neg = -1
-
-    weak_pos = OneDegreePoly()
-    weak_pos.std_range = (100,300)
-
-    p.plots = [strong_pos, strong_neg, weak_pos]
-    loop_create(p)
-    p.add_to_csv()
-
+    p3.plots = [randomOneDegree, randomOneDegree, randomOneDegree]
+    loop_create(p3)
+    p3.add_to_csv()
 
 if __name__ == "__main__":
     main()

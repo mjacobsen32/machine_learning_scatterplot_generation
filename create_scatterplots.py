@@ -1,4 +1,4 @@
-from plotClasses.plot_gen_class import Plotting
+from plotClasses.PlotGen import Plotting
 from plotClasses.OneDegreePoly import OneDegreePoly
 from plotClasses.Grouping import Grouping
 

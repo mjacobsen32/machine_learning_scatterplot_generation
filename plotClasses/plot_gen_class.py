@@ -18,13 +18,13 @@ Object attributes:
 '''
 
 class Plotting:
-    def __init__(self, label, total, remove_tree):
+    def __init__(self, label, total, remove_tree, color_scheme=rgb):
         self.parent_dir = parent_dir
         self.csv_parent_dir = csv_parent_dir
         self.class_label = label
         self.images_path = os.path.join(self.parent_dir, self.class_label)
         self.csv_path = os.path.join(self.csv_parent_dir, self.class_label)
-        self.rgb = rgb
+        self.rgb = color_scheme
         self.total_plots = total
         self.plots = []
         self.delete_tree(remove_tree)
@@ -45,21 +45,17 @@ class Plotting:
     def add_to_csv(self):
         with open(self.csv_path+'.csv', 'w') as csvfile:
             filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            filewriter.writerow(["image","label","equation1","samples1","std1",
-            "equation2","samples2","std2",
-            "equation3","samples3","std3"])
+            topRow = ["image", "label"]
+
+            for i in range(len(self.plots)):
+                topRow += ["equation_"+i,"samples_"+i,"std_"+i] 
+
+            filewriter.writerow(topRow)
             for i in range(0, self.total_plots):
-                filewriter.writerow([self.class_label+'_'+str(i)+'.png', 
-                                        self.class_label,
-                                        self.equations[i][0],
-                                        self.samples[i][0],
-                                        self.std[i][0],
-                                        None if len(self.equations[i]) < 2 else self.equations[i][1],
-                                        None if len(self.samples[i]) < 2 else self.samples[i][1],
-                                        None if len(self.std[i]) < 2 else self.std[i][1],
-                                        None if len(self.equations[i]) < 3 else self.equations[i][2],
-                                        None if len(self.samples[i]) < 3 else self.samples[i][2],
-                                        None if len(self.std[i]) < 3 else self.std[i][2]])
+                row = [self.class_label+'_'+str(i)+'.png',self.class_label]
+                for j in range(len(self.plots)):
+                    row+= [self.equations[i][j], self.samples[i][j], self.std[i][j]]
+                filewriter.writerow(row)
 
 
 

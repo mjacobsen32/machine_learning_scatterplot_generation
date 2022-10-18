@@ -1,6 +1,7 @@
 from plotClasses.PlotGen import Plotting
 from plotClasses.OneDegreePoly import OneDegreePoly
 from plotClasses.Grouping import Grouping
+from parameters.constants import *
 
 '''
     Notes:
@@ -26,22 +27,13 @@ def loop_create(p):
         p.create_plot(i)
 
 def main():    
-    p3 = Plotting(label='threeLines', total=1000, remove_tree=False)
-    p2 = Plotting(label='twoLines', total=1000, remove_tree=False)
-    p1 = Plotting(label='oneLines', total=1000, remove_tree=False)
-    randomOneDegree = OneDegreePoly()
+    p6 = Plotting(label='6_lines', total=10, remove_tree=False, color_scheme=purples)
     
-    p1.plots = [randomOneDegree]
-    loop_create(p1)
-    p1.add_to_csv()
+    randomOneDegree = OneDegreePoly()
 
-    p2.plots = [randomOneDegree, randomOneDegree]
-    loop_create(p2)
-    p2.add_to_csv()
-
-    p3.plots = [randomOneDegree, randomOneDegree, randomOneDegree]
-    loop_create(p3)
-    p3.add_to_csv()
+    p6.plots = [randomOneDegree, randomOneDegree, randomOneDegree, randomOneDegree, randomOneDegree, randomOneDegree]
+    loop_create(p6)
+    p6.add_to_csv()
 
 if __name__ == "__main__":
     main()

@@ -33,14 +33,15 @@ class Plotting:
         self.std = []
 
     def delete_tree(self, remove_tree):
-        if os.path.exists(self.images_path):
-            if remove_tree:
-                try:
-                    os.shutil.rmtree(self.images_path, ignore_errors=True)
-                except:
-                    print("Error deleting directory: {}".format(self.images_path))
-        else:
-            os.mkdir(self.images_path)
+        #if os.path.exists(self.images_path):
+        #    if remove_tree:
+        #        try:
+        #            os.shutil.rmtree(self.images_path, ignore_errors=True)
+        #        except:
+        #            print("Error deleting directory: {}".format(self.images_path))
+        #else:
+        #os.mkdir(self.images_path)
+        return
 
     def add_to_csv(self):
         with open(self.csv_path+'.csv', 'w') as csvfile:
@@ -48,13 +49,13 @@ class Plotting:
             topRow = ["image", "label"]
 
             for i in range(len(self.plots)):
-                topRow += ["equation_"+i,"samples_"+i,"std_"+i] 
+                topRow += ["equation_"+str(i),"samples_"+str(i),"std_"+str(i)] 
 
             filewriter.writerow(topRow)
             for i in range(0, self.total_plots):
                 row = [self.class_label+'_'+str(i)+'.png',self.class_label]
                 for j in range(len(self.plots)):
-                    row+= [self.equations[i][j], self.samples[i][j], self.std[i][j]]
+                    row+= [str(self.equations[i][j]), str(self.samples[i][j]), str(self.std[i][j])]
                 filewriter.writerow(row)
 
 

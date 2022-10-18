@@ -27,7 +27,7 @@ def loop_create(p):
         p.create_plot(i)
 
 def main():    
-    p6 = Plotting(label='6_lines', total=10, remove_tree=False, color_scheme=purples)
+    p6 = Plotting(label='sixLines', total=10, remove_tree=False, color_scheme=purples)
     
     randomOneDegree = OneDegreePoly()
 

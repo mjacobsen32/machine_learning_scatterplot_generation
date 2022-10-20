@@ -27,13 +27,20 @@ def loop_create(p):
         p.create_plot(i)
 
 def main():    
-    p6 = Plotting(label='sixLines', total=10, remove_tree=False, color_scheme=purples)
-    
+    p6 = Plotting(label='sixLines', total=1000, remove_tree=False, color_scheme=purples)
+    p5 = Plotting(label='fiveLines', total=1000, remove_tree=False, color_scheme=purples)
+    p4 = Plotting(label='fourLines', total=1000, remove_tree=False, color_scheme=purples)
+    p3 = Plotting(label='threeLines', total=1000, remove_tree=False, color_scheme=purples)
+    p2 = Plotting(label='twoLines', total=1000, remove_tree=False, color_scheme=purples)
+    p1 = Plotting(label='oneLines', total=1000, remove_tree=False, color_scheme=purples)
+
+    toCreate = [p1,p2,p3,p4,p5,p6]
     randomOneDegree = OneDegreePoly()
 
-    p6.plots = [randomOneDegree, randomOneDegree, randomOneDegree, randomOneDegree, randomOneDegree, randomOneDegree]
-    loop_create(p6)
-    p6.add_to_csv()
+    for tot, p in enumerate(toCreate):
+        p.plots = [randomOneDegree for _ in range(tot+1)]
+        loop_create(p)
+        p.add_to_csv()
 
 if __name__ == "__main__":
     main()

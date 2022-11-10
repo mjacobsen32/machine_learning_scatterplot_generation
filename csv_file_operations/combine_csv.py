@@ -10,15 +10,17 @@ import pandas as pd
 
     The script is ran with the following operation:
     
-    python combine_csv.py <path_to_csv1.csv> <path_to_csv2.csv> <path_to_new_csv.csv>
+    python combine_csv.py <plots from each csv file> <path_to_csv1.csv> <path_to_csv2.csv> <path_to_new_csv.csv>
 '''
 
 def main(argv):
+    plotsFromEach = int(argv[1])
     with open(argv[-1], 'w') as newCSV:
         filewriter = csv.writer(newCSV, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         filewriter.writerow(["image", "class"])
-        for class_, file_name in enumerate(argv[1:-1]):
-            df = pd.read_csv(file_name)
+        for class_, file_name in enumerate(argv[2:-1]):
+            df = pd.read_csv(filepath_or_buffer=file_name,
+                             nrows=plotsFromEach)
             images_list = df['image'].tolist()
             for i in images_list:
                 filewriter.writerow([i, class_])

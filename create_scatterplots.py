@@ -27,18 +27,19 @@ def loop_create(p):
         p.create_plot(i)
 
 def main():    
-    p6 = Plotting(label='sixLines', total=1000, remove_tree=False, color_scheme=purples)
-    p5 = Plotting(label='fiveLines', total=1000, remove_tree=False, color_scheme=purples)
-    p4 = Plotting(label='fourLines', total=1000, remove_tree=False, color_scheme=purples)
-    p3 = Plotting(label='threeLines', total=1000, remove_tree=False, color_scheme=purples)
-    p2 = Plotting(label='twoLines', total=1000, remove_tree=False, color_scheme=purples)
-    p1 = Plotting(label='oneLines', total=1000, remove_tree=False, color_scheme=purples)
+    #p6 = Plotting(label='sixLines', total=1000, remove_tree=False, color_scheme=purples)
+    #p5 = Plotting(label='fiveLines', total=1000, remove_tree=False, color_scheme=purples)
+    #p4 = Plotting(label='fourLines', total=1000, remove_tree=False, color_scheme=purples)
+    p3 = Plotting(label='threeLinesRGB', total=40000, remove_tree=False, color_scheme=rgb2)
+    p2 = Plotting(label='twoLinesRGB', total=20000, remove_tree=False, color_scheme=rgb2)
+    p1 = Plotting(label='oneLinesRGB', total=10000, remove_tree=False, color_scheme=rgb2)
 
-    toCreate = [p1,p2,p3,p4,p5,p6]
+    toCreate = [p1,p2,p3]
     randomOneDegree = OneDegreePoly()
 
-    for tot, p in enumerate(toCreate):
-        p.plots = [randomOneDegree for _ in range(tot+1)]
+    plots = [1,2,3]
+    for i, p in enumerate(toCreate):
+        p.plots = [randomOneDegree for _ in range(plots[i])]
         loop_create(p)
         p.add_to_csv()
 

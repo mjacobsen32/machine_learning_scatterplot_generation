@@ -44,7 +44,7 @@ class Plotting:
         return
 
     def add_to_csv(self):
-        with open(self.csv_path+'.csv', 'w') as csvfile:
+        with open(self.csv_path+'.csv', 'a') as csvfile:
             filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
             topRow = ["image", "label"]
 
@@ -61,9 +61,10 @@ class Plotting:
 
 
     def create_plot(self, i):
-        plt.figure(num=0, figsize=(6,6), clear=True)
+        plt.figure(num=0, figsize=(6,6), clear=True, facecolor=(0.0, 0.0, 0.0))
         plt.tick_params(left=False, right=False, labelleft=False, labelbottom=False, bottom=False)
         plt.axis([0,100,0,100])
+        #plt.Axes.set_facecolor(color=(0.0, 0.0, 0.0))
         equationsPlot = []
         stdPlot = []
         samplesPlot = []
@@ -72,7 +73,10 @@ class Plotting:
             equationsPlot.append(eq)
             stdPlot.append(std)
             samplesPlot.append(sample)
-            plt.scatter(x=x,y=y,c=self.rgb[j])
+            plt.scatter(x=x,y=y,color=self.rgb[j], edgecolors='face')
+        plt.gca().set(facecolor=(0.0, 0.0, 0.0))
+        #plt.margins(x=0, y=0)
+        plt.tight_layout()
         self.samples.append(samplesPlot)
         self.std.append(stdPlot)
         self.equations.append(equationsPlot)
